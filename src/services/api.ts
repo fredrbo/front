@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 const api: AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER,
+  baseURL: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/megasena/',
   headers: {
     'Content-Type': 'application/json',
   }
