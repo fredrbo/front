@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import api from "../../services/api";
 import service from "../../services/sorteio";
 import { SorteioProps } from "../../types/interface";
+import { render } from "@testing-library/react";
+import { setTimeout } from "timers/promises";
 
 
 export function Main() {
@@ -15,12 +17,9 @@ export function Main() {
     const [nomeMunicipioUFSorteio, setNomeMunicipioUFSorteio] = useState('');
     const [numero, setNumero] = useState(0);
     const [valorEstimadoProximoConcurso, setValorEstimadoProximoConcurso] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
 
-
-    function componentDidMount() {
-        list()
-    }
 
     function setInfo(sorteio: SorteioProps) {
         setDataApuracao(sorteio.dataApuracao)
@@ -42,47 +41,58 @@ export function Main() {
 
     };
 
+    React.useEffect(() => {
+        list()        
+        setIsLoading(false)
+    }, []);
+
     function random(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     return (
         <>
-            <div  >
+            {isLoading && (
+                <div className="mt-4">
+                    <Text description="Carregando..." color="#0066b3" fontSize="60px" fontWeight="700" />
+                </div>
+            )}
+            {!isLoading && (
 
-                <div className="mt-3">
-                    <div>
-                        <Text description="Resultado" color='#0066b3' fontWeight='normal' fontSize='40px' />
-                        <Text description={`Concurso ${numero} (${dataApuracao})`} color='#776d7b' fontSize='25px' margin='17px 0px 0px 15px' />
+                <div>
+                    <div className="mt-3">
+                        <div>
+                            <Text description="Resultado" color='#0066b3' fontWeight='normal' fontSize='40px' />
+                            <Text description={`Concurso ${numero} (${dataApuracao})`} color='#776d7b' fontSize='25px' margin='17px 0px 0px 15px' />
+                        </div>
                     </div>
-                </div>
-                <hr className='w-50'></hr>
+                    <hr className='w-75'></hr>
 
-                <div className='mt-4'>
-                    <Text description={`Sorteio realizado no ${localSorteio} em ${nomeMunicipioUFSorteio}`} color='#777584' fontSize='20px' />
-                </div>
-
-                <div className=' my-4'>
-                    <Number number={dezenasSorteadasOrdemSorteio[0]} />
-                    <Number number={dezenasSorteadasOrdemSorteio[1]} />
-                    <Number number={dezenasSorteadasOrdemSorteio[2]} />
-                    <Number number={dezenasSorteadasOrdemSorteio[3]} />
-                    <Number number={dezenasSorteadasOrdemSorteio[4]} />
-                    <Number number={dezenasSorteadasOrdemSorteio[5]} />
-                </div>
-
-                <div className='row mt-3'>
-                    <div className='col-2'>
-                        <Text description={`Estimativa de prêmio do próximo concurso ${dataProximoConcurso}`} fontSize='17px' />
+                    <div className='mt-4'>
+                        <Text description={`Sorteio realizado no ${localSorteio} em ${nomeMunicipioUFSorteio}`} color='#777584' fontSize='20px' />
                     </div>
-                    <div className='col-3 '>
-                        <Text description={`R$ ${valorEstimadoProximoConcurso},00`} fontSize='35px' color="#344673" fontWeight="bold" />
+
+                    <div className=' my-4'>
+                        <Number number={dezenasSorteadasOrdemSorteio[0]} />
+                        <Number number={dezenasSorteadasOrdemSorteio[1]} />
+                        <Number number={dezenasSorteadasOrdemSorteio[2]} />
+                        <Number number={dezenasSorteadasOrdemSorteio[3]} />
+                        <Number number={dezenasSorteadasOrdemSorteio[4]} />
+                        <Number number={dezenasSorteadasOrdemSorteio[5]} />
                     </div>
+
+                    <div className='row mt-3'>
+                        <div className='col-4 mt-3'>
+                            <Text description={`Estimativa de prêmio do próximo concurso ${dataProximoConcurso}`} fontSize='17px' />
+                        </div>
+                        <div className='col-5 mt-3'>
+                            <Text description={`R$ ${valorEstimadoProximoConcurso},00`} fontSize='35px' color="#344673" fontWeight="bold" />
+                        </div>
+                    </div>
+
                 </div>
 
-                <button onClick={list}>Verificar sorteio</button>
-            </div>
-
+            )}
         </>
     )
 }

@@ -7,7 +7,9 @@ import { Main } from './pages/main/main';
 function App() {
   return (
     <>
+    <div className='center'>
       <Main></Main>
+    </div>
     </>
   );
 }
