@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import api from "../../services/api";
 import service from "../../services/sorteio";
 import { SorteioProps } from "../../types/interface";
-import { render } from "@testing-library/react";
-import { setTimeout } from "timers/promises";
+import { IMaskInput } from 'react-imask';
 
 
 export function Main() {
@@ -37,13 +36,14 @@ export function Main() {
         if (!response.error) {
             setSorteio(response);
             setInfo(response);
+            setIsLoading(false)
+
         }
 
     };
 
     React.useEffect(() => {
-        list()        
-        setIsLoading(false)
+        list()
     }, []);
 
     function random(min: number, max: number): number {
