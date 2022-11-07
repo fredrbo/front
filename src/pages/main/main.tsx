@@ -3,7 +3,7 @@ import { Text } from "../../components/Text";
 import React, { useEffect, useState } from 'react';
 import api from "../../services/api";
 import service from "../../services/sorteio";
-import { SorteioProps } from "../../types/interface";
+import { SorteioProps } from "../../types/index";
 import { IMaskInput } from 'react-imask';
 
 
@@ -41,8 +41,8 @@ export function Main() {
         }
 
     };
-
-    React.useEffect(() => {
+    
+    useEffect(() => {
         list()
     }, []);
 

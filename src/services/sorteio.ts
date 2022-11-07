@@ -1,4 +1,4 @@
-import { SorteioProps, Error } from "../types/interface";
+import { SorteioProps, Error } from "../types/index";
 import api from "./api";
 
 class SorteioService {
