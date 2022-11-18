@@ -4,7 +4,7 @@ export interface SorteioProps {
     acumulado: boolean,
     dataApuracao: string,
     dataProximoConcurso: string,
-    dezenasSorteadasOrdemSorteio: string[],
+    listaDezenas: string[],
     localSorteio: string,
     nomeMunicipioUFSorteio: string,
     numero: number,

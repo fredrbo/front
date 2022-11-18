@@ -13,7 +13,7 @@ type SpanProps = {
 
 export const SpanComp = styled.span<SpanProps>`
     margin: ${props => props.margin ? props.margin : "0px"};
-    color: ${props => props.color ? props.color : "black"};
+    color: ${props => props.theme.text};
     font-size: ${props => props.fontSize};
     font-weight: ${props => props.fontWeight ? props.fontWeight : 'normal'}
     display: inline

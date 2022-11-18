@@ -9,11 +9,11 @@ type NumerProps = {
 
 export const NumberComp = styled.span<NumerProps>`
     margin: ${props => props.margin ? props.margin : "0px"};
-    color: ${props => props.color ? props.color : "white"};
+    color: ${props => props.theme.textNumber};
     font-size: 38px;
     border-radius: 35px;
     display: inline;
-    background-color: #209869;
+    background-color: ${props => props.theme.bgNumber};
     margin: 0px 10px;
     display: inline;
     padding: ${props => props.padding ? props.padding : "12px 15px"};
